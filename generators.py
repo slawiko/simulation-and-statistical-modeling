@@ -1,7 +1,8 @@
 import random
+from methods import brakovki_for_negative_binomial
 
 
-class MultiplicativeCongruentialGenerator:
+class MultiplicativeCongruential:
     def __init__(self):
         self.seq = []
 
@@ -46,4 +47,17 @@ class MacLarenMarsaglia:
             s = int(generator2[i] * K)
             self.seq.append(V[s])
             V[s] = generator1[i]
+        return self.seq
+
+
+class Brakovki:
+    def __init__(self):
+        self.seq = []
+
+    def generate(self, n, generator, cache=False):
+        if cache and len(self.seq) == n:
+            return self.seq
+        self.seq = list()
+        for i in range(n):
+            self.seq.append(brakovki_for_negative_binomial(0.25, 20, generator.generate(n)))
         return self.seq

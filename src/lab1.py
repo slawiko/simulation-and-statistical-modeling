@@ -1,8 +1,8 @@
 import criterias
-from generators import MacLarenMarsaglia, MultiplicativeCongruentialGenerator, Random
+from generators import MacLarenMarsaglia, MultiplicativeCongruential, Random
 
 r = Random()
-mc = MultiplicativeCongruentialGenerator()
+mc = MultiplicativeCongruential()
 mm = MacLarenMarsaglia()
 
 mcp = criterias.pirson(mc.generate(100), 100)
