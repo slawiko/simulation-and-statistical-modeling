@@ -8,7 +8,6 @@
 def brakovki_for_negative_binomial(p, r, generator):
     if r > len(generator):
         raise Exception('Parameter p must be smaller than generator length')
-
     count_smaller, count_bigger = 0, 0
     for x in generator:
         if x < p:
@@ -17,5 +16,4 @@ def brakovki_for_negative_binomial(p, r, generator):
             count_bigger += 1
         if count_smaller == r:
             return count_bigger
-
     return None
