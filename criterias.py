@@ -1,25 +1,26 @@
 import math
 
 
-def kolmogorov(generator):
-    generator = sorted(generator)
-    n = len(generator)
+def kolmogorov(sequence):
+    sequence = sorted(sequence)
+    n = len(sequence)
     D = 0
     for i in range(n):
-        diff = abs((i + 1) / n - generator[i])
+        diff = abs((i + 1) / n - sequence[i])
         D = diff if D < diff else D
     return D * math.sqrt(n)
 
 
-def pirson(generator, k):
-    n = len(generator)
-    size = 1 / k
+# TODO: сделать образцовое распределение
+def pirson(sequence, k, interval=1):
+    n = len(sequence)
+    size = interval / k
     down, up = 0, 0 + size
     exp_count = n / k
     real_count = 0
     hi2 = 0
     for i in range(k):
-        for g in generator:
+        for g in sequence:
             if down <= g < up:
                 real_count += 1
         hi2 += ((real_count - exp_count) ** 2) / exp_count
