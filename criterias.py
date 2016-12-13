@@ -11,6 +11,7 @@ def kolmogorov(sequence):
     return D * math.sqrt(n)
 
 
+# TODO: make for lab1
 def pirson(sequence, distribution_sequence, interval=1):
     n = len(sequence)
     k = len(distribution_sequence) - 1
