@@ -1,13 +1,14 @@
 import criterias
+from distributions import uniform
 from generators import MacLarenMarsaglia, MultiplicativeCongruential, Random
 
 r = Random()
 mc = MultiplicativeCongruential()
 mm = MacLarenMarsaglia()
 
-mcp = criterias.pirson(mc.generate(100), 100)
-rp = criterias.pirson(r.generate(100), 10)
-mmp = criterias.pirson(mm.generate(mc.generate(100), r.generate(100)), 100)
+mcp = criterias.pirson(mc.generate(100), uniform(0, 1, 100))
+rp = criterias.pirson(r.generate(100), uniform(0, 1, 100))
+mmp = criterias.pirson(mm.generate(mc.generate(100), r.generate(100)), uniform(0, 1, 100))
 
 mck = criterias.kolmogorov(mc.generate(100))
 rk = criterias.kolmogorov(r.generate(100))

@@ -12,18 +12,17 @@ def kolmogorov(sequence):
 
 
 # TODO: сделать образцовое распределение
-def pirson(sequence, k, interval=1):
-    n = len(sequence)
+def pirson(sequence, sample, interval=1):
+    k = len(sample)
     size = interval / k
     down, up = 0, 0 + size
-    exp_count = n / k
     real_count = 0
     hi2 = 0
     for i in range(k):
         for g in sequence:
             if down <= g < up:
                 real_count += 1
-        hi2 += ((real_count - exp_count) ** 2) / exp_count
+        hi2 += ((real_count - sample[i]) ** 2) / sample[i]
         real_count = 0
         down, up = up, round(up + size, 15)  # bullshit
     return hi2
