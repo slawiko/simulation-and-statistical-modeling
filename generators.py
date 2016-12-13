@@ -3,18 +3,21 @@ from methods import brakovki_for_negative_binomial
 
 
 class MultiplicativeCongruential:
-    def __init__(self):
+    def __init__(self, beta=78125, m=2 ** 31, start=78125):
         self.seq = []
+        self.beta = beta
+        self.m = m
+        self.start = start
 
-    def generate(self, n, beta=78125, m=2 ** 31, start=78125, cache=False):
+    def generate(self, n, cache=False):
         if cache and len(self.seq) == n:
             return self.seq
         temp = list()
-        temp.append(start)
+        temp.append(self.start)
         self.seq = list()
         for i in range(n):
-            self.seq.append(temp[i] / m)
-            temp.append((beta * temp[i]) % m)
+            self.seq.append(temp[i] / self.m)
+            temp.append((self.beta * temp[i]) % self.m)
         return self.seq
 
 
@@ -51,13 +54,17 @@ class MacLarenMarsaglia:
 
 
 class Brakovki:
-    def __init__(self):
+    def __init__(self, p, r):
         self.seq = []
+        self.p = p
+        self.r = r
 
     def generate(self, n, generator, cache=False):
         if cache and len(self.seq) == n:
             return self.seq
         self.seq = list()
-        for i in range(n):
-            self.seq.append(brakovki_for_negative_binomial(0.25, 20, generator.generate(n)))
+        while len(self.seq) < n:
+            temp = brakovki_for_negative_binomial(self.p, self.r, generator.generate(n))
+            if temp:
+                self.seq.append(temp)
         return self.seq
