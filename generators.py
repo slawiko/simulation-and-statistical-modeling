@@ -38,18 +38,18 @@ class MacLarenMarsaglia:
     def __init__(self):
         self.seq = []
 
-    def generate(self, generator1, generator2, cache=False):
-        if len(generator1) is not len(generator2):
-            raise Exception('Generators must have the same len')
-        if cache and len(self.seq) == len(generator1):
+    def generate(self, generator1, generator2, n, cache=False):
+        seq1 = generator1.generate(n)
+        seq2 = generator2.generate(n)
+        if cache and len(self.seq) == len(seq1):
             return self.seq
-        K = len(generator1)
-        V = list(generator1)
+        K = len(seq1)
+        V = list(seq1)
         self.seq = list()
         for i in range(K):
-            s = int(generator2[i] * K)
+            s = int(seq2[i] * K)
             self.seq.append(V[s])
-            V[s] = generator1[i]
+            V[s] = seq1[i]
         return self.seq
 
 
