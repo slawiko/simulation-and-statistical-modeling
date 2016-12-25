@@ -23,3 +23,7 @@ def uniform(a, b, n):
     for i in np.arange(a, b, 1/n):
         result.append(1)
     return result
+
+
+def ravn_reverse(a, b, x):
+    return x * (b - a) + a
