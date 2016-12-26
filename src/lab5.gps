@@ -1,0 +1,20 @@
+TABL      TABLE M1,0,1,100
+          GENERATE (Poisson(1, 6))
+          TRANSFER .75,TYPETWO,TYPEONE
+TYPETWO   SEIZE SMTWO
+          ADVANCE (Exponential(1, 0, 5))
+          ADVANCE (Exponential(1, 0, 5))
+          ADVANCE (Exponential(1, 0, 5))
+          RELEASE SMTWO
+          ADVANCE 9,3
+          TRANSFER ,TRANSPORT
+TYPEONE   SEIZE SMONE
+          ADVANCE (Exponential(1, 0, 5))
+          ADVANCE (Exponential(1, 0, 5))
+          RELEASE SMONE
+          ADVANCE 5,2
+          TRANSPORT ADVANCE 4,1
+          TABULATE TABL
+          TERMINATE
+          GENERATE 480
+          TERMINATE 1

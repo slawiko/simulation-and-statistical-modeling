@@ -1,0 +1,25 @@
+MEM    STORAGE     8
+       GENERATE    8,6,,100
+       QUEUE       A1
+       ENTER       MEM,1
+       DEPART      A1
+MSIX   QUEUE       A2
+       TRANSFER    BOTH,MONE,MTWO
+MONE   SEIZE       CPU1
+       DEPART      A2
+       ADVANCE     (Exponential(1, 0, 5))
+       RELEASE     CPU1
+       TRANSFER    ,MTHREE
+MTWO   SEIZE       CPU2
+       DEPART      A2
+       ADVANCE     (Exponential(1, 0, 2))
+       RELEASE     CPU2
+MTHREE TRANSFER    .6,MFIVE,MFOUR
+MFOUR  QUEUE       A3
+       SEIZE       DISK
+       DEPART      A3
+       ADVANCE     5,3
+       RELEASE     DISK
+       TRANSFER    ,MSIX
+MFIVE  LEAVE       MEM,1
+       TERMINATE   1
